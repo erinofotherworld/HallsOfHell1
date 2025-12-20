@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('images/InfernalRealm.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        p{
+            color:red;
+            font-family: 'Arial Black', Gadget, sans-serif;
+            font-size: 14px;
+        }
+       .center-image {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <p class="centered-text">
+            <a href="Introduction.html">Introductions</a>
+            &nbsp;|&nbsp;
+            <a href="HallsOfHell1.html">Halls Of Hell</a>
+            &nbsp;|&nbsp;
+            <a href="IntPsycRead.html">Intuitive Psychological Readings</a>
+            &nbsp;|&nbsp;
+            <a href="SundayWLilith.html">Sunday with Lilith</a>
+            &nbsp;|&nbsp;
+            <a href="AboutMe.html" class="active" aria-current="page">About Me</a>
+            &nbsp;|&nbsp;
+            <a href="ContactMe.html">Contact</a>
+        </p>
+    </nav>
+
+    <header>
+        <h1 class="center-text">About Me</h1>
+    </header>
+
+    <main>
+        <section>
+            <p class="center-text">This page is intentionally blank. Content about Erin will go here.</p>
+        </section>
+    </main>
+
+    <!-- Social media nav (copied from site pages) -->
+    <nav class="social-nav" aria-label="social media links">
+        <a href="https://www.threads.com/@erinofotherworld?__pwa=1" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+            <img class="social-icon" src="images/ThreadsLogo.png" alt="Threads logo">
+        </a>
+        <a href="https://fetlife.com/NaszriteSin" target="_blank" rel="noopener noreferrer" aria-label="FetLife">
+            <img class="social-icon" src="images/FetLife1.png" alt="FetLife logo">
+        </a>
+        <a href="https://signal.me/#eu/29xMRCXdjUzc_33p4QREeYGRYf-BYCHfuNMosfd0rIVAhnx7sDVI452jrwJ7LAry" target="_blank" rel="noopener noreferrer" aria-label="Signal">
+            <img class="social-icon" src="images/SignalChat1.png" alt="Signal logo">
+        </a>
+        <a href="https://substack.com/@erinofotherworldscrh001?utm_source=user-menu" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+            <img class="social-icon" src="images/SubstackLogo.png" alt="Substack logo">
+        </a>
+        <a href="https://discord.gg/WGBBBNuubU" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+            <img class="social-icon" src="images/DiscordLogo1.png" alt="Discord logo">
+        </a>
+        <a href="mailto:erinofotherworld.scrh001@gmail.com" aria-label="Email">
+            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/></svg>
+        </a>
+    </nav>
+
+    <!-- Audio player (copied) -->
+    <div class="audio-player" aria-label="site audio player" data-title="The Restless Shadow" data-artist="SUNO" data-art="images/LuciNLilithMeet.jpg">
+        <audio id="site-audio" loop>
+            <source src="audio/TheRestlessShadows.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="meta-and-art">
+            <img class="album-art" src="images/LuciNLilithMeet.jpg" alt="Album art">
+            <div class="meta">
+                <div class="song-title">The Restless Shadow</div>
+                <div class="artist">SUNO</div>
+            </div>
+        </div>
+        <div class="controls">
+            <button class="play" aria-label="play">Play</button>
+            <button class="pause" aria-label="pause">Pause</button>
+            <button class="stop" aria-label="stop">Stop</button>
+            <label class="volume-label" for="volume-range">Volume</label>
+            <input id="volume-range" class="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="volume">
+        </div>
+        <div class="progress-container" aria-hidden="false">
+            <input class="progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="seek">
+        </div>
+        <div class="time" aria-live="polite">00:00 / 00:00</div>
+    </div>
+
+    <footer>
+        <p class="center-text" style="color:darkred">&copy; 2025 Halls Of Hell Project: By Erin Nyght. Artistic elemtents by Erin Nyght & Google Gemini AI Generation. All art elements edited in Google's SnapSeed & Infinate Painter by Erin Nyght
+        </p>
+        <img class="center-image" src="images/SafeSpace.png" width="150" height="150" alt="This is a 2SLGBTQIA Safe Space">
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
