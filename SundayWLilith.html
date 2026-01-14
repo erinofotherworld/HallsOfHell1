@@ -20,6 +20,28 @@
             display: block;
             margin: 0 auto;
         }
+        /* Today's date styling */
+        .today {
+            background-color: #ff0000 !important;
+            color: #000000 !important;
+            font-weight: bold;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 5px #ff0000;
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px #ff0000, 0 0 30px #b60202;
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 5px #ff0000;
+            }
+        }
     </style>
 </head>
 <body>
@@ -27,7 +49,7 @@
         <p class="centered-text">
             <a href="Introduction.html">Introductions</a>
             &nbsp;|&nbsp;
-            <a href="index.html">Halls Of Hell</a>
+            <a href="HallsOfHell1.html">Halls Of Hell</a>
             &nbsp;|&nbsp;
             <a href="IntPsycRead.html">Intuitive Psychological Readings</a>
             &nbsp;|&nbsp;
@@ -159,7 +181,7 @@
             </div>
         </section>
     </main>
-    <img class="center-image" src="images/NaamahFrame1.png" width="300" height="300" alt="sigil of Naamah">
+    <img class="center-image" src="images/NaszriteSinHandle.png" width="500" height="700" alt="sigil of Naamah">
     <nav class="social-nav" aria-label="social media links">
         <a href="https://www.threads.com/@erinofotherworld?__pwa=1" target="_blank" rel="noopener noreferrer" aria-label="Threads">
             <img class="social-icon" src="images/ThreadsLogo.png" alt="Threads logo">
@@ -181,7 +203,7 @@
         </a>
     </nav>
     <div class="audio-player" aria-label="site audio player" data-title="The Restless Shadow" data-artist="SUNO" data-art="images/LuciNLilithMeet.jpg">
-        <audio id="site-audio" loop>
+        <audio id="site-audio">
             <source src="audio/TheRestlessShadows.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
@@ -193,9 +215,11 @@
             </div>
         </div>
         <div class="controls">
+            <button class="prev" aria-label="previous track">⏮️</button>
             <button class="play" aria-label="play">Play</button>
             <button class="pause" aria-label="pause">Pause</button>
             <button class="stop" aria-label="stop">Stop</button>
+            <button class="next" aria-label="next track">⏭️</button>
             <label class="volume-label" for="volume-range">Volume</label>
             <input id="volume-range" class="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="volume">
         </div>
@@ -209,6 +233,50 @@
         </p>
         <img class="center-image" src="images/SafeSpace.png" width="150" height="150" alt="This is a 2SLGBTQIA Safe Space">
     </footer>
+<script>
+    // Highlight today's date in the calendar
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+        const todayDate = today.getDate();
+        const todayMonth = today.getMonth(); // 0 = January
+        const todayYear = today.getFullYear();
+        
+        // Get all calendar tables
+        const calendars = document.querySelectorAll('.calendar');
+        
+        calendars.forEach(calendar => {
+            const caption = calendar.querySelector('caption');
+            if (caption) {
+                const captionText = caption.textContent;
+                // Extract month and year from caption (e.g., "December 12,025HE")
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                                  'July', 'August', 'September', 'October', 'November', 'December'];
+                
+                let calendarMonth = -1;
+                for (let i = 0; i < monthNames.length; i++) {
+                    if (captionText.includes(monthNames[i])) {
+                        calendarMonth = i;
+                        break;
+                    }
+                }
+                
+                // Check if this calendar is for the current month and year
+                if (calendarMonth === todayMonth) {
+                    const cells = calendar.querySelectorAll('tbody td');
+                    cells.forEach(cell => {
+                        const cellText = cell.textContent.trim();
+                        const cellNumber = parseInt(cellText);
+                        
+                        // Mark today's date
+                        if (cellNumber === todayDate && !isNaN(cellNumber)) {
+                            cell.classList.add('today');
+                        }
+                    });
+                }
+            }
+        });
+    });
+</script>
 <script src="script.js"></script>
 </body>
 </html>
