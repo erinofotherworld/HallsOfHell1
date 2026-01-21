@@ -127,7 +127,7 @@
 			const name = anon ? 'Anonymous' : (nameInput.value.trim() || 'Anonymous');
 			const subject = `Halls Of Hell - Suggestion (rating ${rating})`;
 			let body = `Page: ${window.location.href}\nRating: ${rating}\nName: ${name}\n\nComments:\n${comments}`;
-			const mailto = `mailto:erinofotherworld.scrh001@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+			const mailto = `mailto:milady.naszrite@proton.me?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 			try{ localStorage.setItem(SUGGESTION_KEY, '1'); }catch(e){}
 			// open the user's mail client to send the suggestion
 			window.location.href = mailto;
