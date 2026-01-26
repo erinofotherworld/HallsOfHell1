@@ -179,6 +179,83 @@ body p, body li { color: rgb(255, 0, 0); }
   .event-popup { left: 10px; right: 10px; max-width: calc(100% - 20px); }
 }
 
+/* Lilith Tracker overlay badge */
+.tracker-overlay {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  z-index: 10001;
+  cursor: pointer;
+}
+.tracker-overlay img {
+  display: block;
+  width: 200px;
+  height: 150px;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.tracker-overlay:hover img {
+  animation: floating 2s ease-in-out infinite;
+  /* The transition property above ensures a gentle return */
+}
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.tracker-tooltip {
+  position: absolute;
+  top: 160px;
+  right: 0;
+  background: #111;
+  color: #ffdede;
+  border: 2px solid #b60202;
+  padding: 16px 18px;
+  border-radius: 8px;
+  white-space: normal;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  max-width: 540px;
+  min-width: 320px;
+}
+.tracker-tooltip .scrolling-text {
+  display: block;
+  white-space: normal;
+  animation: scroll-left-right 4s linear 1;
+  text-align: center;
+  font-size: 8pt;
+}
+.tracker-overlay:hover .tracker-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+@keyframes scroll-left-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  10% {
+    transform: translateX(-100%);
+  }
+  90% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
 /* Embedded audio player styles */
 .audio-player {
   margin: 20px auto 10px auto;
