@@ -127,7 +127,7 @@
 			const name = anon ? 'Anonymous' : (nameInput.value.trim() || 'Anonymous');
 			const subject = `Halls Of Hell - Suggestion (rating ${rating})`;
 			let body = `Page: ${window.location.href}\nRating: ${rating}\nName: ${name}\n\nComments:\n${comments}`;
-			const mailto = `mailto:milady.naszrite@proton.me?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+			const mailto = `mailto:erinofotherworld.scrh001@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 			try{ localStorage.setItem(SUGGESTION_KEY, '1'); }catch(e){}
 			// open the user's mail client to send the suggestion
 			window.location.href = mailto;
@@ -176,12 +176,8 @@
 		}
 		// try to show the next-event popup when present on this page
 		try { showNextEventPopupIfPresent(); } catch(e){ /* ignore if not present */ }
-		// Show the site suggestion box after 20 minutes (skips Introduction.html)
-		try { 
-			setTimeout(() => {
-				showSuggestionBoxIfAppropriate(); 
-			}, 1200000); // 20 minutes = 20 * 60 * 1000 milliseconds
-		} catch(e){ /* ignore if not present */ }
+		// try to show the site suggestion box (skips Introduction.html)
+		try { showSuggestionBoxIfAppropriate(); } catch(e){ /* ignore if not present */ }
 		// highlight current day on calendar tables when appropriate
 		try { highlightCalendarDays(); } catch(e){ /* ignore if not present */ }
 		// initialize animated Demon cursor (uses PNG/SVG fallback) — disabled on touch
