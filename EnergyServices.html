@@ -1,4 +1,586 @@
-<section><h2><img class="center-image" src="images/DemonicEnergySerices.png" width="900" height="700"></h2>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('images/InfernalRealm.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        p{
+            color:red;
+            font-family: 'Arial Black', Gadget, sans-serif;
+            font-size: 14px;
+        }
+       .center-image {
+            display: block;
+            margin: 0 auto;
+        }
+        /* Appointment Calendar Styles */
+        .appointment-calendar {
+            max-width: 800px;
+            margin: 30px auto;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #b60202;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .appointment-calendar h3 {
+            color: #ff6666;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #ffdede;
+        }
+        .calendar-header button {
+            background: #b60202;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .calendar-header button:hover {
+            background: #d60404;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        .calendar-day-header {
+            color: #ff6666;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .calendar-day {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #444;
+            padding: 15px;
+            text-align: center;
+            color: #ffdede;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calendar-day:hover {
+            background: rgba(182,2,2,0.3);
+            border-color: #b60202;
+            transform: scale(1.05);
+        }
+        .calendar-day.empty {
+            background: transparent;
+            border: none;
+            cursor: default;
+        }
+        .calendar-day.empty:hover {
+            transform: none;
+        }
+        .calendar-day.past {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .calendar-day.past:hover {
+            background: rgba(0,0,0,0.5);
+            border-color: #444;
+            transform: none;
+        }
+        /* Booking Modal Styles */
+        .booking-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        .booking-modal-overlay.active {
+            display: flex;
+        }
+        .booking-modal {
+            background: #111;
+            color: #ffdede;
+            border: 2px solid #b60202;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            border-radius: 8px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.9);
+        }
+        .booking-modal h3 {
+            color: #ff6666;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .booking-form-group {
+            margin-bottom: 20px;
+        }
+        .booking-form-group label {
+            display: block;
+            color: #ffdede;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .booking-services {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .booking-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .booking-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .booking-checkbox label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+        }
+        .booking-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #ffdede;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+        }
+        .booking-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+        .booking-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        .booking-btn-confirm {
+            background: #b60202;
+            color: white;
+        }
+        .booking-btn-confirm:hover {
+            background: #d60404;
+        }
+        .booking-btn-cancel {
+            background: transparent;
+            color: #b60202;
+            border: 1px solid #b60202;
+        }
+        .booking-btn-cancel:hover {
+            background: rgba(182,2,2,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Lilith Tracker Overlay -->
+    <div class="tracker-overlay">
+        <img src="images/LilithTracker.png" alt="Lilith Tracker">
+        <div class="tracker-tooltip"><span class="scrolling-text">Lilith: Grant Me Strength!<br>The Joker is my Spirit Animal This Dark Night.</span></div>
+    </div>
+    <nav>
+        <p class="centered-text">
+            <a href="Introduction.html">Introductions</a>
+            &nbsp;|&nbsp;
+            <a href="HallsOfHell1.html">Halls Of Hell</a>
+            &nbsp;|&nbsp;
+            <a href="IntPsycRead.html">Intuitive Psychological Readings</a>
+            &nbsp;|&nbsp;
+            <a href="SundayWLilith.html">Sunday with Lilith</a>
+            &nbsp;|&nbsp;
+            <a href="EnergyServices.html">Energy Services</a>
+            &nbsp;|&nbsp;
+            <a href="AboutMe.html">About Me</a>
+            &nbsp;|&nbsp;
+            <a href="ContactMe.html">Contact Me</a>
+        </p>
+    </nav>
+    <header>
+        <h1><img class="center-image" src="images/DemonicEnergyServices.png" width="900" height="700"></h1>
+    </header>
+    <main>
+        <section>
+            <img class="center-image" src="images/Demonic Mirror2.png" width="300" height="500">
+            <p class="center-text" style="font-size: 28px; color: red;"><b><u>Energy Services</u></b></p>
+            <p class="center-text" style="color: red;"><img src="images/DemonArrow2.png" width="100" height="75"><b><i>I offer a selection of energy services,</i></b> depending on 
+            your wants and desired outcomes in your lives - be that a simple Aura Cleansing or a relaxing Guided Pathwork Meditation: to Reiki, a boost of divine energy that promotes
+            your body to heal itself in the ways that you need. These services listed below are open to you.
+            </p>
+            <p class="center-text" style="color: red;">Look over the list of services below, and when you are ready to schedule an appointment; there is a calendar provided below where 
+            you can choose the date and fill out the time you desire.
+            </p>
+        </section>
+        <section>
+        <h2><img class="center-image" src="images/DemonicEnergySerices.png" width="900" height="700"></h2>
+            <p class="center-text" style="font-size: 24px; color: red"><b><u>Energy Services Listed By Catagory</u></b></p>
+            <p class="center-text" style="font-size: 20px; color: red"><b><u>Usui Reiki Healing Energy</u></b></p>
+            <p class="center-text" style="font-size: 16px; color: red"><img src="images/DemonArrow2.png" width="100" height="75">Reiki Healing: $2.00 per minute, 15 minute minimum.</p>
+            <p class="center-text" style="font-size: 12px; color: red">Usui Reiki is the process of channeling universal energy from the Universe through the practitioner and into the client. From
+            there the energy, which is nothing more than an energy boost that promotes a sense of relaxation, calm & serenity while that energy simultaneously promotes the client's body to heal itself in the ways that the client's body needs to. This energy can only be used for the highest and best good of the person receiving it; meaning it cannot be used for anything darker or nefarious. The work has built-in protection and auto correct features so to speak. And as the practitioner I need not know what is ailing the client if
+            the client is uncomfortable with the idea of it.
+            </p>
+            <p class="center-text" style="font-size: 12px; color: red">Online or Distance Reiki does not diminish the benefits the client can receive. Distance matters to humans - not to energy. Being
+            at a distance, or viewing each other over a monitor or a mobile screen does not diminish the benefits nor does it delay the receiving of the benefits that Reiki or any energy healing has to offer.
+            </p>
+            <!-- Lilith Tracker Overlay -->
+            <div class="tracker-overlay">
+                <img src="images/LilithTracker.png" alt="Lilith Tracker">
+                <div class="tracker-tooltip"><span class="scrolling-text">*Lilith grant me the Strength to handle this shit today!<br>*Samael bless my wrath as I witness and feel this shit!<br>*The Joker: Be my Spirit Animal as I exist in this Hellish Reality</span></div>
+            </div>
+            <!-- Demon Paradox Scroll Overlay -->
+            <div class="paradox-scroll-overlay" id="paradoxScrollOverlay-energy">
+                <button class="close-scroll" id="closeParadoxScroll-energy" title="Close">&times;</button>
+                <img src="images/DemonParadoxScroll.png" alt="Demon Paradox Scroll" id="paradoxScrollImg-energy">
+            </div>
+            <script>
+            (function() {
+                var overlay = document.getElementById('paradoxScrollOverlay-energy');
+                var img = document.getElementById('paradoxScrollImg-energy');
+                var closeBtn = document.getElementById('closeParadoxScroll-energy');
+                var enlarged = false;
+                function enlarge() {
+                    overlay.classList.add('enlarged');
+                    enlarged = true;
+                    document.body.style.overflow = 'hidden';
+                }
+                function shrink() {
+                    overlay.classList.remove('enlarged');
+                    enlarged = false;
+                    document.body.style.overflow = '';
+                }
+                img.addEventListener('mouseenter', function() {
+                    if (!enlarged) enlarge();
+                });
+                closeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    shrink();
+                });
+                document.addEventListener('keydown', function(e) {
+                    if (enlarged && (e.key === 'Escape' || e.key === 'Esc')) shrink();
+                });
+                overlay.addEventListener('click', function(e) {
+                    if (enlarged && e.target === overlay) shrink();
+                });
+            })();
+            </script>
+        </section>
+        <section>
+            <h3><p class="center-text" style="font-size: 20px; color: red"><b><u>Personal EMF/Aura Cleansing</u></b></p></h3>
+            <p class="center-text" style="font-size: 16px; color: red"><img src="images/DemonArrow2.png" width="100" height="75">Basic Aura Cleansing including Chakra Cleansing: $2.00 per minute. 4
+            minute(s) session. $8.00 total.</p>
+            <p class="center-text" style="font-size: 12px; color: red">The shortest session and the cheapest to offer, the basic aura cleanse (in person if at fairs or events or over distance on
+            screens/monitors) a piece of Selenite crystal is moved over the aura. Since Selenite is a self purifying stone, it purifies the part of the Aura it touches - cleansing it of basic daily muck - aka the stresses, everyday fights and disagreements we all have, the overwhelm that comes from the constant bombardment of bad news and negativity that
+            happens in this world every day. Additional focus to your Chakras is given as well: not just to the 7 major that western society colonized but to the 13 multi dimensional chakras (7 major chakras: your root, sacral, solar plexus, heart, throat, third eye & crown chakras; 2 transpersonal chakras located above your crown chakra: the soul star and stellar gateway chakras
+            and 4 minor chakras located in the hands and feet.
+            </p>
+            <p class="center-text" style="font-size: 12px; color: red">Overall even with this session being a basic one, the idea is to offer an opportunity to shine yourself as much as possible so that
+            you meet the day as sparkly & shiney as possible.
+            </p>
+            <p class="center-text" style="font-size: 16px; color: red"><img src="images/DemonArrow2.png" width="100" height="75">In-Depth Aura Cleansing, Chakras & Grounding: $2.00 per minute.16 to 20 minute(s)
+            session. $32.00- $40.00
+            </p>
+            <p class="center-text" style="font-size: 12px; color: red">A more In-Depth session that uses a combination of Scanning to determine where points of problems are located. Practitioner gets the
+            client to ground using a short guided meditation whilst the use of the Selenite and a focused "scrubbing" the muck off of the client if not pulling it out of the aura if the muck/problem is deeper.
+            All Chakra Points are harmonized and realigned (Multidimensional - and Minor Chakras) Reiki is used to help sooth the points where the added "scrubbing" is done and as a general energy boost to start your
+            day.
+            </p>
+            <p class="center-text" style="font-size: 12px; color: red">At the end of the session there is a free debrief on what was seen, where it was seen, and why what was done was done along with an
+            opportunity to discuss any feelings that the client may have felt throughout the session.
+            </p>
+            <p class="center-text" style="font-size: 16px; color: red"><img src="images/DemonArrow2.png" width="100" height="75">Cord Cutting Ritual/Aura Cleansing. $4.00 per minute at 10 minutes is $40.00
+            </p>
+            <p class="center-text" style="font-size: 12px; color: red">There are many ways in which a cord Cutting Ritual can be done - from elaborate candle rituals that represent the parties involved and
+            their connection burning away, to a practitioner plucking strings out of a client that connect them to toxic people that do not belong in their lives, or belong in their aura any longer. I employ a
+            combination of the two. We as humans are social creatures. This sociological drive for community and belonging is hardwired in our brains and our nervous system starting from our earliest known ancestors
+            of our genus. In short- it was a survival trait that kept our species alive in a hostile world.
+            </p>
+            <p class="center-text" style="font-size: 12px; color: red">Unfortunately - we still live in a hostile world where we are our biggest threat on an individual and deeply personal level, communally
+            and existentially. We never grew out of the same survival skills that kept us alive when our species were infants.
+            </p>
+            <p class="center-text" style="font-size: 12px; color: red">When it comes to our energy connections to other people, I think of it like a giant Spiders Web where that connection to a toxic family member
+            or lover or friend turned friendemy is an etheric stand of silk that connects us to each other. Sometimes letting go of that person is enough to drop that connection, sometimes it takes a little longer
+            to truly be rid of them. Sometimes: if that connection is persistent, help is needed to sever the connection for good.
+            </p>
+            <p class="center-text" style="font-size: 12px; color: red">That's where I come in; with the finality of severing the toxic and persistent connection.
+            <img src="images/DemonCaution.png" width="25" height="50">But: a word of caution - since I specialize in severing the toxic and the persistent connections that linger like a parasite, you
+            are to make absolutely sure that the connection is one you are wanting, and are needing to be rid of is for your personal energetic and mental well-being. There is no taking this back. You will be
+            affected by the loss of this connection just as much as they will. And, as the practitioner, using my skills to enact your will, you will take full energetic responsibility for any and all consequences that
+            may come: and it will come.<img src="images/DemonCaution.png" width="25" height="50"> See the Legal page under Liability Waver <img src="images/DemonArrow2.png" width="50" height="25">here
+            </p>
 
-<section class="appointment-calendar">
+        </section>
+
+        <section>
+            <img class="center-image" src="images/DemonicEnergySerices.png" width="700" height="500">
+        </section>
+        
+        <section class="appointment-calendar">
+            <h3>Schedule an Appointment</h3>
+            <div class="calendar-header">
+                <button id="prevMonth">&lt; Previous</button>
+                <span id="currentMonth"></span>
+                <button id="nextMonth">Next &gt;</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar days will be generated by JavaScript -->
+            </div>
+        </section>
+    </main>
+    
+    <!-- Booking Modal -->
+    <div class="booking-modal-overlay" id="bookingModal">
+        <div class="booking-modal">
+            <h3>Book Your Appointment</h3>
+            <p style="color: #ff6666; margin-bottom: 20px;">Selected Date: <span id="selectedDate"></span></p>
+            <form id="bookingForm">
+                <div class="booking-form-group">
+                    <label>Select Service(s):</label>
+                    <div class="booking-services">
+                        <div class="booking-checkbox">
+                            <input type="checkbox" id="service-reiki" name="services" value="Reiki">
+                            <label for="service-reiki">Reiki</label>
+                        </div>
+                        <div class="booking-checkbox">
+                            <input type="checkbox" id="service-readings" name="services" value="Readings">
+                            <label for="service-readings">Readings</label>
+                        </div>
+                        <div class="booking-checkbox">
+                            <input type="checkbox" id="service-pathworking" name="services" value="Pathworking Meditations">
+                            <label for="service-pathworking">Pathworking Meditations</label>
+                        </div>
+                        <div class="booking-checkbox">
+                            <input type="checkbox" id="service-aura" name="services" value="Aura Cleansings">
+                            <label for="service-aura">Aura Cleansings</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-form-group">
+                    <label for="bookingReason">Why are you looking for this service?</label>
+                    <textarea id="bookingReason" class="booking-textarea" placeholder="Please describe why you're seeking this service..."></textarea>
+                </div>
+                <div class="booking-form-group">
+                    <label for="clientName">Your Name:</label>
+                    <input type="text" id="clientName" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid #444; border-radius: 4px; color: #ffdede;" required>
+                </div>
+                <div class="booking-form-group">
+                    <label for="clientEmail">Your Email:</label>
+                    <input type="email" id="clientEmail" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid #444; border-radius: 4px; color: #ffdede;" required>
+                </div>
+                <div class="booking-buttons">
+                    <button type="button" class="booking-btn booking-btn-cancel" id="cancelBooking">Cancel</button>
+                    <button type="submit" class="booking-btn booking-btn-confirm">Confirm Appointment Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <nav class="social-nav" aria-label="social media links">
+        <a href="https://www.threads.com/@erinofotherworld?__pwa=1" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+            <img class="social-icon" src="images/ThreadsLogo.png" alt="Threads logo">
+        </a>
+        <a href="https://fetlife.com/NaszriteSin" target="_blank" rel="noopener noreferrer" aria-label="FetLife">
+            <img class="social-icon" src="images/FetLife1.png" alt="FetLife logo">
+        </a>
+        <a href="https://signal.me/#eu/29xMRCXdjUzc_33p4QREeYGRYf-BYCHfuNMosfd0rIVAhnx7sDVI452jrwJ7LAry" target="_blank" rel="noopener noreferrer" aria-label="Signal">
+            <img class="social-icon" src="images/SignalChat1.png" alt="Signal logo">
+        </a>
+        <a href="https://substack.com/@erinofotherworldscrh001?utm_source=user-menu" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+            <img class="social-icon" src="images/SubstackLogo.png" alt="Substack logo">
+        </a>
+        <a href="https://discord.gg/WGBBBNuubU" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+            <img class="social-icon" src="images/DiscordLogo1.png" alt="Discord logo">
+        </a>
+        <a href="mailto:erinofotherworld.scrh001@gmail.com" aria-label="Email">
+            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/></svg>
+        </a>
+    </nav>
+    <div class="audio-player" aria-label="site audio player" data-title="The Restless Shadow" data-artist="SUNO" data-art="images/LuciNLilithMeet.jpg">
+        <audio id="site-audio">
+            <source src="audio/TheRestlessShadows.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="meta-and-art">
+            <img class="album-art" src="images/LuciNLilithMeet.jpg" alt="Album art">
+            <div class="meta">
+                <div class="song-title">The Restless Shadow</div>
+                <div class="artist">SUNO</div>
+            </div>
+        </div>
+        <div class="controls">
+            <button class="prev" aria-label="previous track">⏮️</button>
+            <button class="play" aria-label="play">Play</button>
+            <button class="pause" aria-label="pause">Pause</button>
+            <button class="stop" aria-label="stop">Stop</button>
+            <button class="next" aria-label="next track">⏭️</button>
+            <label class="volume-label" for="volume-range">Volume</label>
+            <input id="volume-range" class="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="volume">
+        </div>
+        <div class="progress-container" aria-hidden="false">
+            <input class="progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="seek">
+        </div>
+        <div class="time" aria-live="polite">00:00 / 00:00</div>
+    </div>
+    <footer>
+        <p class="center-text" style="color:darkred">&copy; 2025 Halls Of Hell Project: By Erin Nyght. Artistic elemtents by Erin Nyght & Google Gemini AI Generation. All art elements edited in Google Pixel Art App for further edits, cropping, & backgrounds added.
+        </p>
+        <img class="center-image" src="images/SafeSpace.png" width="150" height="150" alt="This is a 2SLGBTQIA Safe Space">
+    </footer>
+<script src="script.js"></script>
+<script>
+// Appointment Calendar JavaScript
+(function() {
+    let currentDate = new Date();
+    let selectedDateStr = '';
+    
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    
+    function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+        
+        const calendarGrid = document.getElementById('calendarGrid');
+        calendarGrid.innerHTML = '';
+        
+        // Add day headers
+        dayNames.forEach(day => {
+            const dayHeader = document.createElement('div');
+            dayHeader.className = 'calendar-day-header';
+            dayHeader.textContent = day;
+            calendarGrid.appendChild(dayHeader);
+        });
+        
+        // Add empty cells for days before the first of the month
+        for (let i = 0; i < firstDay; i++) {
+            const emptyDay = document.createElement('div');
+            emptyDay.className = 'calendar-day empty';
+            calendarGrid.appendChild(emptyDay);
+        }
+        
+        // Add days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayCell = document.createElement('div');
+            dayCell.className = 'calendar-day';
+            dayCell.textContent = day;
+            
+            const cellDate = new Date(year, month, day);
+            
+            // Disable past dates
+            if (cellDate < today) {
+                dayCell.classList.add('past');
+            } else {
+                dayCell.addEventListener('click', () => openBookingModal(cellDate));
+            }
+            
+            calendarGrid.appendChild(dayCell);
+        }
+    }
+    
+    function openBookingModal(date) {
+        selectedDateStr = date.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        document.getElementById('selectedDate').textContent = selectedDateStr;
+        document.getElementById('bookingModal').classList.add('active');
+        document.getElementById('bookingForm').reset();
+    }
+    
+    function closeBookingModal() {
+        document.getElementById('bookingModal').classList.remove('active');
+    }
+    
+    // Event Listeners
+    document.getElementById('prevMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+    });
+    
+    document.getElementById('nextMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+    });
+    
+    document.getElementById('cancelBooking').addEventListener('click', closeBookingModal);
+    
+    document.getElementById('bookingModal').addEventListener('click', (e) => {
+        if (e.target.id === 'bookingModal') {
+            closeBookingModal();
+        }
+    });
+    
+    document.getElementById('bookingForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const selectedServices = Array.from(document.querySelectorAll('input[name="services"]:checked'))
+            .map(cb => cb.value);
+        
+        if (selectedServices.length === 0) {
+            alert('Please select at least one service.');
+            return;
+        }
+        
+        const reason = document.getElementById('bookingReason').value;
+        const clientName = document.getElementById('clientName').value;
+        const clientEmail = document.getElementById('clientEmail').value;
+        
+        // Create email body
+        const subject = encodeURIComponent(`Appointment Request for ${selectedDateStr}`);
+        const body = encodeURIComponent(
+            `New Appointment Request\n\n` +
+            `Date: ${selectedDateStr}\n` +
+            `Client Name: ${clientName}\n` +
+            `Client Email: ${clientEmail}\n\n` +
+            `Services Requested:\n${selectedServices.map(s => '- ' + s).join('\n')}\n\n` +
+            `Reason for Service:\n${reason}`
+        );
+        
+        // Open email client
+        window.location.href = `mailto:erinofotherworld.scrh001@gmail.com?subject=${subject}&body=${body}`;
+        
+        closeBookingModal();
+        alert('Your email client will open to send the appointment request. Please send the email to complete your booking.');
+    });
+    
+    // Initialize calendar
+    renderCalendar();
+})();
+</script>
+</body>
+</html>
