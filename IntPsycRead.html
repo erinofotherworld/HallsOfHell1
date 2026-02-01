@@ -205,6 +205,66 @@
         <img src="images/LilithTracker.png" alt="Lilith Tracker">
         <div class="tracker-tooltip"><span class="scrolling-text">Lilith: Grant Me Strength!<br>The Joker is my Spirit Animal This Dark Night.</span></div>
     </div>
+        <!-- Samael Tab Trigger -->
+        <div class="samael-tab-trigger" id="samaelTabTrigger" title="Open Demon Paradox Scroll">
+            <img src="images/SamaelTab.png" alt="Samael Tab" class="samael-tab-img">
+        </div>
+        
+        <!-- Demon Paradox Scroll Overlay -->
+        <div class="paradox-scroll-overlay" id="paradoxScrollOverlay">
+                <button class="close-scroll" id="closeParadoxScroll" title="Close">&times;</button>
+                <img src="images/DemonParadoxScroll.png" alt="Demon Paradox Scroll" id="paradoxScrollImg">
+        </div>
+        
+        <script>
+        (function() {
+            var overlay = document.getElementById('paradoxScrollOverlay');
+            var img = document.getElementById('paradoxScrollImg');
+            var closeBtn = document.getElementById('closeParadoxScroll');
+            var samaelTab = document.getElementById('samaelTabTrigger');
+            var scrollOpen = false;
+            
+            function openScroll() {
+                overlay.classList.add('slide-out');
+                scrollOpen = true;
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeScroll() {
+                overlay.classList.remove('slide-out');
+                scrollOpen = false;
+                document.body.style.overflow = '';
+            }
+            
+            // Toggle scroll when Samael Tab is clicked
+            samaelTab.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (scrollOpen) {
+                    closeScroll();
+                } else {
+                    openScroll();
+                }
+            });
+            
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeScroll();
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (scrollOpen && (e.key === 'Escape' || e.key === 'Esc')) {
+                    closeScroll();
+                }
+            });
+            
+            // Clicking outside the image also closes
+            overlay.addEventListener('click', function(e) {
+                if (scrollOpen && e.target === overlay) {
+                    closeScroll();
+                }
+            });
+        })();
+        </script>
     <nav>
         <p class="centered-text">
             <a href="Introduction.html">Introductions</a>
@@ -243,11 +303,15 @@
             the querrent, the reader, you.</p>
         </section>
         <section>
-            <img class="center-image" src="images/3CardPicture.png" width="700" height="500">
-            <p class="center-text" style="font-size: 35px;"><b>Readings Offered by Catagory</b></p>
-                <p class="center-text" style="font-size: 20px;"><b><i><u>Intuitive Psychological Readings</u></i></b></p>
-                <p style="font-size: 18px;"><img src="images/DemonArrow2.png" width="75" height="25"><b><u>3 Cards: $27.00 USD</u></b></p>
-                <p style="font-size: 18px;"><img src="images/DemonArrow2.png" width="75" height="25"><b><u>6 Cards: Clarification of the 3 Cards (*addon) No Extra Charge: $27.00 USD</u></b></p>
+            <!-- Lilith Tracker Overlay -->
+            <div class="tracker-overlay">
+                <img src="images/LilithTracker.png" alt="Lilith Tracker">
+                <div class="tracker-tooltip"><span class="scrolling-text">*Lilith grant me the Strength to handle this shit today!<br>*Samael bless my wrath as I witness and feel this shit!<br>*The Joker is my Spirit Animal this Dark Night!</span></div>
+            </div>
+            <!-- Demon Paradox Scroll Overlay -->
+            <div class="paradox-scroll-overlay">
+                <img src="images/DemonParadoxScroll.png" alt="Demon Paradox Scroll">
+            </div>
                 <p style="font-size: 18px;"><img src="images/DemonArrow2.png" width="75" height="25"><b><u>7 Cards: Safe Journey: $37.00 USD</u></b></p>
                 <p style="font-size: 18px;"><img src="images/DemonArrow2.png" width="75" height="25"><b><u>10 Cards: Celtic Cross: $52.00 USD</u></b></p>
                 <img class="center-image" src="images/DemonicSpacer2.png" width="400" height="200">
