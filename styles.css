@@ -1,3 +1,105 @@
+/* Samael Tab Trigger Styles */
+.samael-tab-trigger {
+  position: fixed;
+  top: 250px;
+  right: 0;
+  z-index: 10001;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.samael-tab-img {
+  width: auto;
+  height: 120px;
+  filter: drop-shadow(0 0 12px #b60202);
+  animation: red-pulse 1.4s infinite alternate;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.samael-tab-trigger:hover .samael-tab-img {
+  filter: drop-shadow(0 0 20px #ff2222);
+  transform: scale(1.08);
+}
+
+/* Demon Paradox Scroll Overlay - Slide Out Animation */
+.paradox-scroll-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 0, 40, 0);
+  pointer-events: none;
+  transition: background-color 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.paradox-scroll-overlay img {
+  width: 80vw;
+  height: auto;
+  max-width: 700px;
+  max-height: 90vh;
+  filter: drop-shadow(0 0 12px #b60202);
+  opacity: 0;
+  pointer-events: auto;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 12px;
+  cursor: pointer;
+  transform: translateX(150%);
+}
+
+/* When scroll is open, slide in from right and fade in */
+.paradox-scroll-overlay.slide-out {
+  background: rgba(20, 0, 40, 0.85);
+  pointer-events: auto;
+}
+
+.paradox-scroll-overlay.slide-out img {
+  opacity: 1;
+  transform: translateX(0);
+  box-shadow: 0 0 60px #b60202, 0 0 120px #ff2222;
+}
+
+.paradox-scroll-overlay .close-scroll {
+  display: none;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 10002;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ff2222;
+  font-size: 2.2em;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 48px;
+  box-shadow: 0 0 12px #b60202;
+  transition: background 0.2s;
+}
+
+.paradox-scroll-overlay.slide-out .close-scroll {
+  display: block;
+}
+
+.paradox-scroll-overlay.slide-out .close-scroll:hover {
+  background: #b60202;
+  color: #fff;
+}
+
+@keyframes red-pulse {
+  0% { filter: drop-shadow(0 0 8px #b60202); }
+  100% { filter: drop-shadow(0 0 32px #ff2222); }
+}
 /* ProfileProject styles - recreated to restore centering and provide safe defaults */
 
 /* Basic reset */
@@ -228,6 +330,7 @@ body p, body li { color: rgb(255, 0, 0); }
   overflow: hidden;
   max-width: 540px;
   min-width: 320px;
+  z-index: 10001;
 }
 .tracker-tooltip .scrolling-text {
   display: block;
