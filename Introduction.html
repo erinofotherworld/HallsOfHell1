@@ -23,11 +23,47 @@
     </style>
 </head>
 <body>
-    <!-- Lilith Tracker Overlay -->
-    <div class="tracker-overlay">
-        <img src="images/LilithTracker.png" alt="Lilith Tracker">
-        <div class="tracker-tooltip"><span class="scrolling-text">Lilith: Grant Me Strength!<br>The Joker is my Spirit Animal This Dark Night.</span></div>
-    </div>
+        <!-- Lilith Tracker Overlay -->
+        <div class="tracker-overlay">
+                <img src="images/LilithTracker.png" alt="Lilith Tracker">
+                <div class="tracker-tooltip"><span class="scrolling-text">*Lilith grant me the Strength to handle this shit today!<br>*Samael bless my wrath as I witness and feel this shit!<br>*The Joker is my Spirit Animal this Dark Night!</span></div>
+        </div>
+        <!-- Demon Paradox Scroll Overlay -->
+        <div class="paradox-scroll-overlay" id="paradoxScrollOverlay-intro">
+                <button class="close-scroll" id="closeParadoxScroll-intro" title="Close">&times;</button>
+                <img src="images/DemonParadoxScroll.png" alt="Demon Paradox Scroll" id="paradoxScrollImg-intro">
+        </div>
+        <script>
+        (function() {
+            var overlay = document.getElementById('paradoxScrollOverlay-intro');
+            var img = document.getElementById('paradoxScrollImg-intro');
+            var closeBtn = document.getElementById('closeParadoxScroll-intro');
+            var enlarged = false;
+            function enlarge() {
+                overlay.classList.add('enlarged');
+                enlarged = true;
+                document.body.style.overflow = 'hidden';
+            }
+            function shrink() {
+                overlay.classList.remove('enlarged');
+                enlarged = false;
+                document.body.style.overflow = '';
+            }
+            img.addEventListener('mouseenter', function() {
+                if (!enlarged) enlarge();
+            });
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                shrink();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (enlarged && (e.key === 'Escape' || e.key === 'Esc')) shrink();
+            });
+            overlay.addEventListener('click', function(e) {
+                if (enlarged && e.target === overlay) shrink();
+            });
+        })();
+        </script>
     <nav>
         <p class="centered-text">
             <a href="Introduction.html">Introductions</a>
@@ -69,12 +105,6 @@
     </main>
     <img class="center-image" src="images/NaszriteSinHandle.png" width="500" height="700" alt="sigil for Naamah">
     <nav class="social-nav" aria-label="social media links">
-        <a href="https://www.threads.com/@erinofotherworld?__pwa=1" target="_blank" rel="noopener noreferrer" aria-label="Threads">
-            <img class="social-icon" src="images/ThreadsLogo.png" alt="Threads logo">
-        </a>
-        <a href="https://fetlife.com/NaszriteSin" target="_blank" rel="noopener noreferrer" aria-label="FetLife">
-            <img class="social-icon" src="images/FetLife1.png" alt="FetLife logo">
-        </a>
         <a href="https://signal.me/#eu/29xMRCXdjUzc_33p4QREeYGRYf-BYCHfuNMosfd0rIVAhnx7sDVI452jrwJ7LAry" target="_blank" rel="noopener noreferrer" aria-label="Signal">
             <img class="social-icon" src="images/SignalChat1.png" alt="Signal logo">
         </a>
