@@ -66,11 +66,47 @@
             <img class="social-icon" src="images/ThreadsLogo.png" alt="Threads logo">
         </a>
         <a href="https://fetlife.com/NaszriteSin" target="_blank" rel="noopener noreferrer" aria-label="FetLife">
-            <img class="social-icon" src="images/FetLife1.png" alt="FetLife logo">
-        </a>
-        <a href="https://signal.me/#eu/29xMRCXdjUzc_33p4QREeYGRYf-BYCHfuNMosfd0rIVAhnx7sDVI452jrwJ7LAry" target="_blank" rel="noopener noreferrer" aria-label="Signal">
-            <img class="social-icon" src="images/SignalChat1.png" alt="Signal logo">
-        </a>
+            <!-- Lilith Tracker Overlay -->
+            <div class="tracker-overlay">
+                <img src="images/LilithTracker.png" alt="Lilith Tracker">
+                <div class="tracker-tooltip"><span class="scrolling-text">*Lilith grant me the Strength to handle this shit today!<br>*Samael bless my wrath as I witness and feel this shit!<br>*The Joker is my Spirit Animal this Dark Night!</span></div>
+            </div>
+            <!-- Demon Paradox Scroll Overlay -->
+            <div class="paradox-scroll-overlay" id="paradoxScrollOverlay-contact">
+                <button class="close-scroll" id="closeParadoxScroll-contact" title="Close">&times;</button>
+                <img src="images/DemonParadoxScroll.png" alt="Demon Paradox Scroll" id="paradoxScrollImg-contact">
+            </div>
+            <script>
+            (function() {
+                var overlay = document.getElementById('paradoxScrollOverlay-contact');
+                var img = document.getElementById('paradoxScrollImg-contact');
+                var closeBtn = document.getElementById('closeParadoxScroll-contact');
+                var enlarged = false;
+                function enlarge() {
+                    overlay.classList.add('enlarged');
+                    enlarged = true;
+                    document.body.style.overflow = 'hidden';
+                }
+                function shrink() {
+                    overlay.classList.remove('enlarged');
+                    enlarged = false;
+                    document.body.style.overflow = '';
+                }
+                img.addEventListener('mouseenter', function() {
+                    if (!enlarged) enlarge();
+                });
+                closeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    shrink();
+                });
+                document.addEventListener('keydown', function(e) {
+                    if (enlarged && (e.key === 'Escape' || e.key === 'Esc')) shrink();
+                });
+                overlay.addEventListener('click', function(e) {
+                    if (enlarged && e.target === overlay) shrink();
+                });
+            })();
+            </script>
         <a href="https://substack.com/@erinofotherworldscrh001?utm_source=user-menu" target="_blank" rel="noopener noreferrer" aria-label="Substack">
             <img class="social-icon" src="images/SubstackLogo.png" alt="Substack logo">
         </a>
