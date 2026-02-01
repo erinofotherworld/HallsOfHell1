@@ -50,6 +50,66 @@
         <img src="images/LilithTracker.png" alt="Lilith Tracker">
         <div class="tracker-tooltip"><span class="scrolling-text">Lilith: Grant Me Strength!<br>The Joker is my Spirit Animal This Dark Night.</span></div>
     </div>
+    <!-- Samael Tab Trigger -->
+    <div class="samael-tab-trigger" id="samaelTabTrigger-sunday" title="Open Demon Paradox Scroll">
+      <img src="images/SamaelTab.png" alt="Samael Tab" class="samael-tab-img">
+    </div>
+    
+    <!-- Demon Paradox Scroll Overlay -->
+    <div class="paradox-scroll-overlay" id="paradoxScrollOverlay-sunday">
+      <button class="close-scroll" id="closeParadoxScroll-sunday" title="Close">&times;</button>
+      <img src="images/DemonParadoxScroll.png" alt="Demon Paradox Scroll" id="paradoxScrollImg-sunday">
+    </div>
+    
+    <script>
+    (function() {
+      var overlay = document.getElementById('paradoxScrollOverlay-sunday');
+      var img = document.getElementById('paradoxScrollImg-sunday');
+      var closeBtn = document.getElementById('closeParadoxScroll-sunday');
+      var samaelTab = document.getElementById('samaelTabTrigger-sunday');
+      var scrollOpen = false;
+      
+      function openScroll() {
+        overlay.classList.add('slide-out');
+        scrollOpen = true;
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeScroll() {
+        overlay.classList.remove('slide-out');
+        scrollOpen = false;
+        document.body.style.overflow = '';
+      }
+      
+      // Toggle scroll when Samael Tab is clicked
+      samaelTab.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (scrollOpen) {
+          closeScroll();
+        } else {
+          openScroll();
+        }
+      });
+      
+      closeBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeScroll();
+      });
+      
+      document.addEventListener('keydown', function(e) {
+        if (scrollOpen && (e.key === 'Escape' || e.key === 'Esc')) {
+          closeScroll();
+        }
+      });
+      
+      // Clicking outside the image also closes
+      overlay.addEventListener('click', function(e) {
+        if (scrollOpen && e.target === overlay) {
+          closeScroll();
+        }
+      });
+    })();
+    </script>
     <nav>
         <p class="centered-text">
             <a href="Introduction.html">Introductions</a>
