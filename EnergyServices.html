@@ -243,11 +243,47 @@
             <p class=”center-text” style="font-size: 16px; color: red"><img src="images/DemonArrow2.png" width="100" height="75">Reiki Healing: $2.00 per minute, 15 minute minimum.</p>
             <p class=”center-text” style="font-size: 12px; color: red">Usui Reiki is the process of channeling universal energy from the Universe through the practitioner and into the client. From
             there the energy, which is nothing more than an energy boost that promotes a sense of relaxation, calm & serenity while that energy simultaneously promotes the client's body to heal itself.
-            Healing tends to happen when we are in a calm environment, and we feel open and receptive to healing in whichever form it comes in. The energy of Reiki promotes the feelings of calm and
-            relaxation, physically, emotionally and even spiritually.
-            </p>
-            <p class=”center-text” style="font-size: 12px; color: red">Reiki when done in person is traditionally done by a combination of Sigil use and focused laying on hands in the area negotiated
-            for the healing session. If the client is uncomfortable being touched, the practitioner can hover their hands over the target location that was negotiated. No physical contact has to occur if
+            <!-- Lilith Tracker Overlay -->
+            <div class="tracker-overlay">
+                <img src="images/LilithTracker.png" alt="Lilith Tracker">
+                <div class="tracker-tooltip"><span class="scrolling-text">*Lilith grant me the Strength to handle this shit today!<br>*Samael bless my wrath as I witness and feel this shit!<br>*The Joker is my Spirit Animal this Dark Night!</span></div>
+            </div>
+            <!-- Demon Paradox Scroll Overlay -->
+            <div class="paradox-scroll-overlay" id="paradoxScrollOverlay-energy">
+                <button class="close-scroll" id="closeParadoxScroll-energy" title="Close">&times;</button>
+                <img src="images/DemonParadoxScroll.png" alt="Demon Paradox Scroll" id="paradoxScrollImg-energy">
+            </div>
+            <script>
+            (function() {
+                var overlay = document.getElementById('paradoxScrollOverlay-energy');
+                var img = document.getElementById('paradoxScrollImg-energy');
+                var closeBtn = document.getElementById('closeParadoxScroll-energy');
+                var enlarged = false;
+                function enlarge() {
+                    overlay.classList.add('enlarged');
+                    enlarged = true;
+                    document.body.style.overflow = 'hidden';
+                }
+                function shrink() {
+                    overlay.classList.remove('enlarged');
+                    enlarged = false;
+                    document.body.style.overflow = '';
+                }
+                img.addEventListener('mouseenter', function() {
+                    if (!enlarged) enlarge();
+                });
+                closeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    shrink();
+                });
+                document.addEventListener('keydown', function(e) {
+                    if (enlarged && (e.key === 'Escape' || e.key === 'Esc')) shrink();
+                });
+                overlay.addEventListener('click', function(e) {
+                    if (enlarged && e.target === overlay) shrink();
+                });
+            })();
+            </script>
             the client is uncomfortable with the idea of it.
             </p>
             <p class=”center-text” style="font-size: 12px; color: red">Online or Distance Reiki does not diminish the benefits the client can receive. Distance matters to humans - not to energy. Being
