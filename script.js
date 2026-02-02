@@ -380,8 +380,13 @@ function showNextEventPopupIfPresent(){
 	viewBtn.textContent = 'View Calendar';
 	viewBtn.addEventListener('click', ()=>{
 		eventTable.scrollIntoView({behavior:'smooth', block:'center'});
+		// Apply highlight with transition
+		eventTable.style.transition = 'box-shadow 0.3s ease-out';
 		eventTable.style.boxShadow = '0 0 0 4px rgba(182,2,2,0.12)';
-		setTimeout(()=>{ eventTable.style.boxShadow = ''; }, 3000);
+		setTimeout(()=>{ 
+			eventTable.style.boxShadow = '';
+			setTimeout(() => { eventTable.style.transition = ''; }, 300);
+		}, 3000);
 		popup.remove();
 	});
 	const dismiss = document.createElement('button');
@@ -610,26 +615,27 @@ function initSiteAudio(){
 		}catch(e){}
 	}
 	
-function openAlbumPreview(src, title){
-	if(!src) return;
-	const overlay = document.createElement('div');
-	overlay.className = 'album-overlay';
-	overlay.setAttribute('role','dialog');
-	overlay.setAttribute('aria-modal','true');
-	overlay.tabIndex = -1;
+	function openAlbumPreview(src, title){
+		if(!src) return;
+		const overlay = document.createElement('div');
+		overlay.className = 'album-overlay';
+		overlay.setAttribute('role','dialog');
+		overlay.setAttribute('aria-modal','true');
+		overlay.tabIndex = -1;
+		
+		const img = document.createElement('img');
+		img.className = 'album-preview';
+		img.src = src;
+		img.alt = title || 'Album art preview';
+		
+		overlay.addEventListener('click', (e)=>{ if(e.target === overlay) overlay.remove(); });
+		document.addEventListener('keydown', function onKey(e){ if(e.key === 'Escape'){ overlay.remove(); document.removeEventListener('keydown', onKey); } });
+		
+		overlay.appendChild(img);
+		document.body.appendChild(overlay);
+		overlay.focus();
+	}
 	
-	const img = document.createElement('img');
-	img.className = 'album-preview';
-	img.src = src;
-	img.alt = title || 'Album art preview';
-	
-	overlay.addEventListener('click', (e)=>{ if(e.target === overlay) overlay.remove(); });
-	document.addEventListener('keydown', function onKey(e){ if(e.key === 'Escape'){ overlay.remove(); document.removeEventListener('keydown', onKey); } });
-	
-	overlay.appendChild(img);
-	document.body.appendChild(overlay);
-	overlay.focus();
-}
 	window.addEventListener('beforeunload', saveState);
 	document.addEventListener('visibilitychange', ()=>{ if(document.hidden) saveState(); });
 }
