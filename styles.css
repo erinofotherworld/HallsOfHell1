@@ -1,7 +1,7 @@
 /* Samael Tab Trigger Styles */
 .samael-tab-trigger {
   position: fixed;
-  top: 250px;
+  top: 75px;
   right: 0;
   z-index: 10001;
   cursor: pointer;
@@ -42,7 +42,7 @@
 }
 
 .paradox-scroll-overlay img {
-  width: 40.00vw;
+  width: 30.00vw;
   height: auto;
   max-width: 700px;
   max-height: 90vh;
